@@ -1,75 +1,72 @@
 const input = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n').map(Number);
 
-class Heap {
+class MaxBinaryHeap {
   constructor() {
-    this.arr = [];
+    this.values = [];
   }
-
-  left(i) {
-    return 2 * i + 1;
+  insert(element) {
+    this.values.push(element);
+    this.bubbleUp();
   }
-
-  right(i) {
-    return 2 * i + 2;
-  }
-
-  parent(i) {
-    return Math.floor((i - 1) / 2);
-  }
-
-  getMax() {
-    return this.arr[0];
-  }
-
-  insert(k) {
-    let arr = this.arr;
-    arr.push(k);
-
-    let i = arr.length - 1;
-    while (i > 0 && arr[this.parent(i)] < arr[i]) {
-      let p = this.parent(i);
-      [arr[i], arr[p]] = [arr[p], arr[i]];
-      i = p;
+  bubbleUp() {
+    let idx = this.values.length - 1;
+    const element = this.values[idx];
+    while (idx > 0) {
+      let parentIdx = Math.floor((idx - 1) / 2);
+      let parent = this.values[parentIdx];
+      if (element <= parent) break;
+      this.values[parentIdx] = element;
+      this.values[idx] = parent;
+      idx = parentIdx;
     }
   }
-
   extractMax() {
-    let arr = this.arr;
-    if (arr.length == 1) {
-      return arr.pop();
+    const max = this.values[0];
+    const end = this.values.pop();
+    if (this.values.length > 0) {
+      this.values[0] = end;
+      this.sinkDown();
     }
-
-    let res = arr[0];
-    arr[0] = arr[arr.length - 1];
-    arr.pop();
-    this.MaxHeapify(0);
-    return res;
+    return max;
   }
+  sinkDown() {
+    let idx = 0;
+    const length = this.values.length;
+    const element = this.values[0];
+    while (true) {
+      let leftChildIdx = 2 * idx + 1;
+      let rightChildIdx = 2 * idx + 2;
+      let leftChild, rightChild;
+      let swap = null;
 
-  MaxHeapify(i) {
-    let arr = this.arr;
-    let n = arr.length;
-    if (n === 1) {
-      return;
+      if (leftChildIdx < length) {
+        leftChild = this.values[leftChildIdx];
+        if (leftChild > element) {
+          swap = leftChildIdx;
+        }
+      }
+      if (rightChildIdx < length) {
+        rightChild = this.values[rightChildIdx];
+        if ((swap === null && rightChild > element) || (swap !== null && rightChild > leftChild)) {
+          swap = rightChildIdx;
+        }
+      }
+      if (swap === null) break;
+      this.values[idx] = this.values[swap];
+      this.values[swap] = element;
+      idx = swap;
     }
-    let l = this.left(i);
-    let r = this.right(i);
-    let largest = i;
-    if (l < n && arr[l] > arr[i]) largest = l;
-    if (r < n && arr[r] > arr[largest]) largest = r;
-    if (largest !== i) {
-      [arr[i], arr[largest]] = [arr[largest], arr[i]];
-      this.MaxHeapify(largest);
-    }
+  }
+  peek() {
+    return this.values[0];
   }
 }
 
-let heap = new Heap();
+let heap = new MaxBinaryHeap();
 let result = '';
-
 for (let i = 1; i <= input.length; i++) {
   if (input[i] === 0) {
-    if (heap.arr.length === 0) {
+    if (heap.values.length === 0) {
       result += '0' + '\n';
     } else {
       result += heap.extractMax() + '\n';
@@ -78,5 +75,4 @@ for (let i = 1; i <= input.length; i++) {
     heap.insert(input[i]);
   }
 }
-
 console.log(result.slice(0, -1));
