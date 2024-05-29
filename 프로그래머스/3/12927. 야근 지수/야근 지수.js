@@ -3,7 +3,7 @@ function solution(n, works) {
 
     const worksMap = works.reduce((a, c) => a.set(c, a.get(c)+1 || 1), new Map());
     while (n > 0 && worksMap.size) {
-        const cur = [...worksMap.keys()].reduce((a,c) => a > c ? a : c, 1);
+        const cur = [...worksMap.keys()].reduce((a,c) => a > c ? a : c);
         const curVal = worksMap.get(cur);
         const dif = n - curVal;
 
