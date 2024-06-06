@@ -1,3 +1,3 @@
 function solution(number) {
-    return [...number].reduce((acc, cur) => acc + +cur, 0) % 9
+    return [...number].reduce((a, c) => a + +c, 0) % 9
 }
