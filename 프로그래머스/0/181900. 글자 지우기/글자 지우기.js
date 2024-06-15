@@ -1,7 +1,3 @@
 function solution(my_string, indices) {
-    var answer = my_string.split('');
-    for(let i=0; i<indices.length; i++){
-        answer[indices[i]]=''
-    }
-    return answer.join('');
+    return [...my_string].reduce((a, c, i) => indices.includes(i) ? a : a + c, '');
 }
