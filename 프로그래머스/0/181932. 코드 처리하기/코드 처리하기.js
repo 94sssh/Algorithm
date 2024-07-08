@@ -1,5 +1,5 @@
 function solution(code) {
-    let ret = ''
+    let ret = '';
     let mode = 0;
     
     [...code].forEach((c, i) => {
