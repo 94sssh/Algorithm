@@ -9,14 +9,5 @@ let input = [];
 rl.on('line', function (line) {
     input = [line];
 }).on('close',function(){
-    str = input[0];
-    let temp = str.split('')
-    for(let i=0; i<temp.length; i++){
-        if(temp[i] === temp[i].toUpperCase()){
-            temp[i] = temp[i].toLowerCase()
-        } else {
-            temp[i] = temp[i].toUpperCase()
-        }
-    }
-    console.log(temp.join(''))
+    console.log(input[0].split('').reduce((a, c) => a + (c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase()), ''));
 });
