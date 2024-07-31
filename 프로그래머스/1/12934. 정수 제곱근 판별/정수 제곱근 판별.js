@@ -1,6 +1,3 @@
-function solution(n) {
-    for(let i=1; i <= n/2+1; i++){
-        if(i*i === n) return (i+1)*(i+1);
-    }
-    return -1;
+function solution(n) {    
+    return Math.sqrt(n) % 1 === 0 ? (Math.sqrt(n)+1)**2 : -1;
 }
