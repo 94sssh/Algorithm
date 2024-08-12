@@ -1,11 +1,10 @@
 function solution(quiz) {
     const calc = (str) => {
         const operation = str.split(' ')[1];
-        const [x, _, y, __, z] = str.split(' ').map((el)=>Number(el));
+        const [x, _, y, __, z] = str.split(' ').map(Number);
 
-        if(operation === '+') return x+y === z ? 'O' : 'X';
-        else return x-y === z ? 'O' : 'X';
+        return operation === '+' ? x+y === z ? 'O' : 'X' : x-y === z ? 'O' : 'X';
     }
     
-    return quiz.map((el)=>calc(el));
+    return quiz.map((el) => calc(el));
 }
