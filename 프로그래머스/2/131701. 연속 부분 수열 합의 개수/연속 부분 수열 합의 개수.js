@@ -7,11 +7,9 @@ function solution(elements) {
         }
     }
     
-    let length = 1;
-    for(let i = 0; i < elements.length; i++){
-        findSum([...elements, ...elements], length)
-        length++;
-    }
+    elements.forEach((el, i) => {
+        findSum([...elements, ...elements], i + 1)
+    })
     
     return answer.size;
 }
