@@ -11,7 +11,10 @@ function solution(s) {
         for(let j = 0; j < s.length; j++){
             if(s[j] === "[" || s[j] === "{" || s[j] === "(") stack.push(s[j]);
             
-            if(stack.length === 0) startWithClose = true;
+            if(stack.length === 0) {
+                startWithClose = true;
+                break;
+            }
                 
             if(s[j] === "]" && stack.at(-1) === "[" || s[j] === "}" && stack.at(-1) === "{" || s[j] === ")" && stack.at(-1) === "(") stack.pop();
         };
