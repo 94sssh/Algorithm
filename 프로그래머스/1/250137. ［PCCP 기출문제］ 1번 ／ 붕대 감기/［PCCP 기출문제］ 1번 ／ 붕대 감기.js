@@ -20,19 +20,16 @@ function solution([t, x, y], health, attacks) {
             attackIndex++;
             count = 0;
         } else {
-            hp += x;
-            if(hp > health) hp = health;
+            hp = hp + x > health ? health : hp + x;
             count++;
         }
         
         if(count === t){
-            hp = hp + y;
-            if(hp > health) hp = health;
+            hp = hp + y > health ? health : hp + y;
             count = 0;
         }
-        console.log(i, '체력', hp, '카운트', count)
+        
         if(hp <= 0) return -1;
     };
-    
     return hp;
 }
