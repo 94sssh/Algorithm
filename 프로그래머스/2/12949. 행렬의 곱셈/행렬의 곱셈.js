@@ -1,21 +1,20 @@
 function solution(arr1, arr2) {
-    const answer = [];
-    
-    arr1.forEach((_, i) => {
-        const temp = [];
+   return arr1.reduce((a, c, i) => {
+        const arr = [];
         
         arr2[0].forEach((_, j) => {
             let sum = 0;
+            
             arr2.forEach((_, k) => {
                 sum += arr1[i][k] * arr2[k][j];
-            })
-            temp.push(sum);
-        });
+            });
+            
+            arr.push(sum);
+        })
         
-        answer.push(temp);
-    });
-    
-    return answer;
+        a.push(arr);
+        return a;
+    }, []);
 }
 
 //         [ 3,  3]
