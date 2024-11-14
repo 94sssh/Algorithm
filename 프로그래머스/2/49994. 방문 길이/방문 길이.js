@@ -12,15 +12,16 @@ function solution(dirs) {
         if(dir === 'L') newCoord[1]--;
         
         if(newCoord[0] >= 0 && newCoord[0] <= 10 && newCoord[1] >= 0 && newCoord[1] <= 10){
-            const road = `${newCoord[0]}${newCoord[1]}${coord[0]}${coord[1]}`;
-            const reverseRoad = `${coord[0]}${coord[1]}${newCoord[0]}${newCoord[1]}`;
+            const front = [newCoord[0], coord[0]].sort((a, b) => a - b);
+            const rear = [newCoord[1], coord[1]].sort((a, b) => a - b);
+            
+            const road = `${front}${rear}`;
         
             if(!answer.includes(road)) answer.push(road);
-            if(!answer.includes(reverseRoad)) answer.push(reverseRoad);
             
             coord = newCoord;
         }
     });
         
-    return answer.length / 2;
+    return answer.length;
 }
