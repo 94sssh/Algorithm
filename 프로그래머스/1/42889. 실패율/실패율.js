@@ -1,11 +1,19 @@
 function solution(N, stages) {
-    let leftStages = stages.length;
-    const failureRateObj = {};
+    const answer = {};
     
-    for(let i=1; i<=N; i++){
-        failureRateObj[i] = (stages.filter((el) => el === i).length)/leftStages;
-        leftStages -= stages.filter((el) => el === i).length;
+    stages.sort((a, b) => b - a);
+    
+    for(let i = 1; i <= N; i++){
+        let stage = 0;
+        const length = stages.length;
+        
+        while(stages.at(-1) === i){
+            stages.pop();
+            stage++;
+        }
+        
+        answer[i] = stage / length;
     }
     
-    return Object.entries(failureRateObj).sort((a, b) => b[1] - a[1]).map((el) => +el[0]);
+    return Object.entries(answer).sort((a, b) => b[1] - a[1]).map((el) => +el[0]);
 }
