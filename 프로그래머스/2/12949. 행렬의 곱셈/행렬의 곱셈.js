@@ -1,5 +1,5 @@
 function solution(arr1, arr2) {
-   return arr1.reduce((a, c, i) => {
+   return arr1.map((c, i) => {
         const arr = [];
         
         arr2[0].forEach((_, j) => {
@@ -11,10 +11,8 @@ function solution(arr1, arr2) {
             
             arr.push(sum);
         })
-        
-        a.push(arr);
-        return a;
-    }, []);
+       return arr;
+    });
 }
 
 //         [ 3,  3]
