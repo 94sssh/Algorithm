@@ -1,12 +1,9 @@
 function solution(prices) {
-    const stack = new Array(prices.length).fill(0);
-
-    prices.forEach((price, idx) => {
-        for(let i = idx + 1; i < prices.length; i++){
-            stack[idx]++;
-            if(prices[i] < price) break;
+    return prices.reduce((a, c, i) => {
+        for(let idx = i + 1; idx < prices.length; idx++){
+            a[i]++;
+            if(prices[idx] < c) break; 
         }
-    })
-    
-    return stack;
+        return a;
+    }, new Array(prices.length).fill(0))
 }
