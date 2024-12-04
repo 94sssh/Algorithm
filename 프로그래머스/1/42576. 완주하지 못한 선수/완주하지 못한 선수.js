@@ -1,8 +1,13 @@
-function solution(participant, completion) {
-    participant.sort();
-    completion.sort();
+function solution(participants, completion) {
+    const hash = {};
     
-    for(let i = 0; i < participant.length; i++){
-        if(participant[i] !== completion[i]) return participant[i];
-    };
+    for(const participant of participants) {
+        hash[participant] = (hash[participant] || 0) + 1;
+    }
+    
+    for(const complete of completion) hash[complete]--;
+    
+    for(key in hash) {
+        if(hash[key] === 1) return key;
+    }
 }
