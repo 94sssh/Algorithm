@@ -1,21 +1,26 @@
 function solution(want, number, discount) {
     let answer = 0;
     
-    const wishlist = [];
+    const wishList = {};
     
-    number.forEach((num, idx) => {
-       for(let j = 1; j <= num; j++){
-           wishlist.push(want[idx]);
-       } 
+    want.forEach((el, i) => {
+        wishList[el] = number[i];
     });
     
-    wishlist.sort()
-    
     for(let i = 0; i <= discount.length - 10; i++){
-        const discountlist = discount.slice(i, i + 10).sort();
+        const discountList = {};
         
-        if(discountlist.every((el, i) => el === wishlist[i])) answer++;
-    };
+        for(let j = i; j < i + 10; j++){
+            discountList[discount[j]] = (discountList[discount[j]] || 0) + 1;
+        }
+        
+        if(Object.entries(wishList).sort().every(([name, quantity], idx) => {
+            const [discountName, discountQuantity] = Object.entries(discountList).sort()[idx];
+            return name === discountName && quantity === discountQuantity;
+        })) {
+            answer++;
+        }
+    }
     
     return answer;
 }
