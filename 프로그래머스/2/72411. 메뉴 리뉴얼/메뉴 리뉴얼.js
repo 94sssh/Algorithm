@@ -17,17 +17,16 @@ const getCombinations = (str, k, obj) => {
 }
 
 function solution(orders, course) {
-    let answer = [];
-    let courseObj = {};
+    const answer = [];
     
     for(let i = 0; i < course.length; i++){
+        const courseObj = {};
+        
         orders.forEach((order) => getCombinations([...order].sort(), course[i], courseObj));
         
         const max = Math.max(...Object.values(courseObj));
                 
-        answer = [...answer, ...Object.keys(courseObj).filter((key) => courseObj[key] === max && courseObj[key] >= 2)];
-        
-        courseObj = {};
+        answer.push(...Object.keys(courseObj).filter((key) => courseObj[key] === max && courseObj[key] >= 2));
     };
     
     return answer.sort();
