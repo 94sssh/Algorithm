@@ -19,8 +19,8 @@ function solution(want, number, discount) {
             return name === discountName && quantity === discountQuantity;
         })) {
             answer++;
-        }
-    }
+        };
+    };
     
     return answer;
 }
