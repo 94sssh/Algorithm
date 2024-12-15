@@ -27,5 +27,5 @@ function solution(enrollList, referralList, seller, amount) {
         shareProfit(name, amount[idx] * 100);
     });
     
-    return Object.values(enroll).map((el) => el[1]);
+    return enrollList.map((el) => enroll[el][1]);
 }
