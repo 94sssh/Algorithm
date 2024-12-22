@@ -1,18 +1,15 @@
 function solution(ingredient) {
-    let burger = 0;
     const burgerStack = [];
     
-    ingredient.forEach((ing) => {
-        burgerStack.push(ing);
-        
+    return ingredient.reduce((a, c) => {
+        burgerStack.push(c);
         while(`${burgerStack.slice(-4)}` === `${[1, 2, 3, 1]}`){
-            burger++;
+            a++;
             burgerStack.pop();
             burgerStack.pop();
             burgerStack.pop();
             burgerStack.pop();
         };
-    });
-    
-    return burger;
+        return a;
+    }, 0);
 }
