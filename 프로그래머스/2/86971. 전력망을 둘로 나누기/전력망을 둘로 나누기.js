@@ -1,7 +1,6 @@
 function solution(n, wires) {
     let answer = n;
-    const network = [];
-    for(let i = 0; i <= n; i++) network.push([]);
+    const network = new Array(n + 1).fill(0).map(() => []);
     
     // dfs로 network를 돌면서 차이 구하기
     // 간선이 하나씩 빠진 상태로 dfs 돌면서 나온 값을 계속해서 diff랑 비교
