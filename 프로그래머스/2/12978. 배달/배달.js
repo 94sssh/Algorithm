@@ -3,8 +3,7 @@ function solution(N, road, K) {
     const times = new Array(N + 1).fill(Infinity);
     
     // 마을별로 도로 연결, 배열로 다음 연결된 마을과 도로의 시간을 저장
-    const town = [];
-    for(let i = 0; i <= N; i++) town.push([]);
+    const town = times.map(() => []);
     
     road.forEach(([a, b, time]) => {
         town[a].push([b, time]);
@@ -22,7 +21,7 @@ function solution(N, road, K) {
         const [prevnode, prevtime] = queue.pop();
         
         town[prevnode].forEach(([nextnode, nexttime]) => {
-            if(times[nextnode] > times[prevnode] + nexttime) {
+            if(times[nextnode] > times[prevnode] + nexttime && times[prevnode] + nexttime <= K) {
                 times[nextnode] = times[prevnode] + nexttime;
                 queue.push([nextnode, nexttime]);
             };
