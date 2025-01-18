@@ -21,9 +21,10 @@ function solution(N, road, K) {
         const [prevnode, prevtime] = queue.pop();
         
         town[prevnode].forEach(([nextnode, nexttime]) => {
-            if(times[nextnode] > times[prevnode] + nexttime && times[prevnode] + nexttime <= K) {
-                times[nextnode] = times[prevnode] + nexttime;
-                queue.push([nextnode, nexttime]);
+            const newtime = prevtime + nexttime;
+            if(times[nextnode] > newtime && newtime <= K) {
+                times[nextnode] = newtime;
+                queue.push([nextnode, newtime]);
             };
         });
     };
